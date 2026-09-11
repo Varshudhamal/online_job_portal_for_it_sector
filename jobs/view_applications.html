@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Applications - {{ job.job_title }}</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #333;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .applications-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .applications-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .application {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .application p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .application a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .application a:hover {
+            text-decoration: underline;
+        }
+
+        .back-btn {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 16px;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section (Navigation) -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'employer_dashboard' %}">Back to Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Applications Container -->
+    <div class="applications-container">
+        <h1>Applications for {{ job.job_title }}</h1>
+
+        {% for application in applications %}
+            <div class="application">
+                <p><strong>Applicant:</strong> {{ application.user.username }}</p>
+                <p><strong>Status:</strong> {{ application.status }}</p>
+                {% if application.resume %}
+                    <p><strong><a href="{{ application.resume.url }}" target="_blank">Download Resume</a></strong></p>
+                {% endif %}
+                {% if application.cover_letter %}
+                    <p><strong>Cover Letter:</strong> {{ application.cover_letter }}</p>
+                {% else %}
+                    <p><em>No cover letter provided.</em></p>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No applications for this job yet.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Back Button -->
+    <a href="{% url 'employer_dashboard' %}" class="back-btn">Back to Dashboard</a>
+</body>
+</html>

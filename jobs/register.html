@@ -1,0 +1,252 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/r1.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 50px 0;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            color: rgb(252, 248, 247);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: bold;
+            color: rgb(252, 248, 247);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: rgb(14, 13, 13);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: rgb(3, 205, 245);
+            outline: none;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 12px;
+            background-color: rgb(45, 206, 238);
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: rgb(30, 176, 200);
+        }
+
+        .role-specific-fields {
+            display: none;
+        }
+
+        .role-specific-fields.active {
+            display: block;
+        }
+
+        .form-group .role-toggle {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .colour {
+            color: white;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .alert-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .alert-error {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        h3.colour {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        h3.colour a {
+            color: #30e7ff;
+            text-decoration: none;
+        }
+
+        h3.colour a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="register-container">
+    <h2>Register</h2>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert {% if message.tags == 'error' %}alert-error{% else %}alert-success{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" id="register-form">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password1">Password (4–8 characters)</label>
+            <input type="password" id="password1" name="password1" required minlength="4" maxlength="8">
+        </div>
+
+        <div class="form-group">
+            <label for="password2">Confirm Password</label>
+            <input type="password" id="password2" name="password2" required minlength="4" maxlength="8">
+        </div>
+
+        <div class="form-group role-toggle">
+            <label for="role">Select Role</label>
+            <select id="role" name="role" required>
+                <option value="employee">Employee</option>
+                <option value="employer">Employer</option>
+            </select>
+        </div>
+
+        <div id="employee-fields" class="role-specific-fields">
+            <div class="form-group">
+                <label for="resume">Upload Resume</label>
+                <input type="file" id="resume" name="resume" accept=".pdf, .docx, .doc">
+            </div>
+        </div>
+
+        <div id="employer-fields" class="role-specific-fields">
+            <div class="form-group">
+                <label for="company_name">Company Name</label>
+                <input type="text" id="company_name" name="company_name">
+            </div>
+            <div class="form-group">
+                <label for="industry">Industry</label>
+                <input type="text" id="industry" name="industry">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Register</button>
+        </div>
+
+        <h3 class="colour">Already have an account? <a href="{% url 'login' %}">Login here</a></h3>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const roleSelect = document.getElementById('role');
+        const employeeFields = document.getElementById('employee-fields');
+        const employerFields = document.getElementById('employer-fields');
+
+        const resume = document.getElementById('resume');
+        const companyName = document.getElementById('company_name');
+        const industry = document.getElementById('industry');
+
+        function toggleRoleSpecificFields() {
+            const selectedRole = roleSelect.value;
+            if (selectedRole === 'employee') {
+                employeeFields.classList.add('active');
+                employerFields.classList.remove('active');
+                resume.required = true;
+                companyName.required = false;
+                industry.required = false;
+            } else {
+                employerFields.classList.add('active');
+                employeeFields.classList.remove('active');
+                resume.required = false;
+                companyName.required = true;
+                industry.required = true;
+            }
+        }
+
+        toggleRoleSpecificFields();
+        roleSelect.addEventListener('change', toggleRoleSpecificFields);
+
+        // Password match validation
+        document.getElementById('register-form').addEventListener('submit', function (e) {
+            const pw1 = document.getElementById('password1').value;
+            const pw2 = document.getElementById('password2').value;
+
+            if (pw1 !== pw2) {
+                alert("Passwords do not match!");
+                e.preventDefault();
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

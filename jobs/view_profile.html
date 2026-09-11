@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ company.name }} - Profile</title>
+    <style>
+        /* Your CSS for employer profile page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .profile-info {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .profile-info h2 {
+            margin-top: 0;
+        }
+        .profile-info p {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+        footer {
+            text-align: center;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Container -->
+    <div class="container">
+        <header>
+            <h1>{{ company.name }} - Profile</h1>
+        </header>
+
+        <div class="profile-info">
+            <h2>Company Information</h2>
+            <p><strong>Company Name:</strong> {{ company.name }}</p>
+            <p><strong>Website:</strong> <a href="{{ company.website }}" target="_blank">{{ company.website }}</a></p>
+            <p><strong>Logo:</strong><br> 
+                {% if company.logo %}
+                    <img src="{{ company.logo.url }}" alt="{{ company.name }}" width="150">
+                {% else %}
+                    <p>No logo uploaded.</p>
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="profile-info">
+            <h2>Your Posted Jobs</h2>
+            {% if company.job_set.all %}
+                <ul>
+                    {% for job in company.job_set.all %}
+                        <li>
+                            <a href="{% url 'job_details' job.id %}">{{ job.job_title }}</a> - {{ job.location }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>You haven't posted any jobs yet.</p>
+            {% endif %}
+        </div>
+
+        <footer>
+            <p>&copy; 2025 JobPortal. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

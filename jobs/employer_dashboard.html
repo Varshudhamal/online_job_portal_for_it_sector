@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Dashboard</title>
+    <style>
+        /* General Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        header nav ul {
+            list-style: none;
+        }
+        header nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        header nav ul li a:hover {
+            color: #ffcc00;
+        }
+
+        /* Main Dashboard Layout */
+        .dashboard-container {
+            display: flex;
+            flex: 1;
+            padding: 30px 20px;
+            gap: 20px;
+            overflow: auto;
+            height: 100%;
+        }
+
+        /* Sidebar Styling */
+        .dashboard-sidebar {
+            width: 250px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            flex-shrink: 0;
+        }
+        .dashboard-sidebar h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .dashboard-sidebar ul {
+            list-style: none;
+        }
+        .dashboard-sidebar ul li {
+            margin-bottom: 15px;
+        }
+        .dashboard-sidebar ul li a {
+            color: #007bff;
+            font-size: 16px;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            transition: color 0.3s;
+        }
+        .dashboard-sidebar ul li a:hover {
+            color: #0056b3;
+        }
+
+        /* Content Section */
+        .dashboard-content {
+            flex: 1;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .dashboard-header h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-header p {
+            color: #777;
+            font-size: 18px;
+        }
+
+        /* Job List Styles */
+        .job-list {
+            margin-top: 20px;
+        }
+
+        .job-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .job-card h4 {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .job-card p {
+            font-size: 16px;
+            color: #777;
+            margin: 5px 0;
+        }
+
+        .job-card a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .job-card a:hover {
+            color: #0056b3;
+        }
+
+        /* Footer Section */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #343a40;
+            color: white;
+            font-size: 14px;
+            margin-top: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .dashboard-sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section (Navigation) -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Dashboard Container -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Section -->
+        <div class="dashboard-sidebar">
+            <h3>Dashboard Menu</h3>
+            <ul>
+                <li><a href="{% url 'employer_dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'post_job' %}">Post New Job</a></li>
+                <li><a href="{% url 'view_profile' %}">View Profile</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content Section -->
+        <div class="dashboard-content">
+            <div class="dashboard-header">
+                <h1>Welcome, {{ user.username }} (Employer)</h1><br/>
+                <p>Manage your job postings and view applications</p><br/><br/>
+            </div>
+
+            <!-- Job List -->
+            <h3>Your Posted Jobs</h3>
+            <div class="job-list">
+                {% for job in jobs_posted %}
+                    <div class="job-card">
+                        <h4>{{ job.job_title }}</h4>
+                        <p><strong>Location:</strong> {{ job.location }}</p>
+                        <p><strong>Applications:</strong> {{ job.total_applications }}</p>
+                        <p><a href="{% url 'view_applications' job.id %}">View Applications</a></p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <h3>Total Applications: {{ total_applications }}</h3>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 JobPortal. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

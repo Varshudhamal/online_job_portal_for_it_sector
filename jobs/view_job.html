@@ -1,0 +1,137 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ job.job_title }} - Job Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 50px;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .job-header h1 {
+            font-size: 36px;
+            color: #333;
+        }
+
+        .job-details p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .apply-button {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .apply-button:hover {
+            background-color: #2980b9;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #333;
+            color: white;
+            padding: 15px 0;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/jobs/">Job Listings</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Job Details Section -->
+    <div class="container">
+        <div class="job-header">
+            <h1>{{ job.job_title }}</h1>
+            <p><strong>Company:</strong> {{ job.company.name }}</p>  <!-- Fixed this to display the company's name -->
+            <p><strong>Location:</strong> {{ job.location }}</p>
+            <p><strong>Salary:</strong> ${{ job.salary }}</p>
+            <p><strong>Posted on:</strong> {{ job.posted_on|date:"F j, Y" }}</p>
+            <p><strong>Application Deadline:</strong> {{ job.application_deadline|date:"F j, Y" }}</p>
+        </div>
+
+        <div class="job-details">
+            <h2>Job Description:</h2>
+            <p>{{ job.description }}</p>
+
+            <h3>Responsibilities:</h3>
+            <p>{{ job.responsibilities }}</p>
+
+            <h3>Qualifications:</h3>
+            <p>{{ job.qualifications }}</p>
+
+            <!-- Apply Button: Display only if the user is an employee -->
+            {% if user.is_authenticated and user.userprofile.is_employee %}
+                <a href="{% url 'apply_for_job' job.id %}" class="apply-button">Apply Now</a>
+            {% elif user.is_authenticated and user.userprofile.is_employer %}
+                <p>You cannot apply for this job because you are an employer.</p>
+            {% else %}
+                <p>Please log in to apply for this job.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Job Portal. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

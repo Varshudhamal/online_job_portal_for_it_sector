@@ -1,0 +1,245 @@
+<!-- website/templates/website/about_us.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <!-- Add Bootstrap for styling -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles for the About Us page */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/con.jpg' %}"); /* Background image URL */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 50px ;
+            
+        }
+        .hero-section {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/con.jpg' %}"); /* Background image URL */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 50px ;
+            color:white;
+            
+        }
+        .hero-section h1 {
+            font-size: 3rem;
+            color:rgb(255, 253, 255);
+        }
+        .team-section {
+            margin-top: 40px;
+            text-align: center;
+            color:black;
+        }
+        .team-member {
+            margin: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .team-member:hover {
+            transform: scale(1.1);
+        }
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+        .btn-custom {
+            background-color:rgb(202, 194, 202);
+            color: rgb(14, 8, 8);
+            border-radius: 5px;
+        }
+        .btn-custom:hover {
+            background-color:rgb(12, 6, 9);
+        }
+        .contact-info {
+            margin-top: 50px;
+            padding: 20px;
+            background-color:rgb(0, 0, 0);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .container text-center {
+            color:white;
+        }
+        .mt-5{
+            color:rgb(2, 0, 1);
+        }
+    </style>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color:rgb(0, 0, 0); /* Light gray background */
+            color: #333; /* Dark gray text color */
+        }
+
+        header {
+            background-color: #333; /* Dark header background */
+            color: black; /* White text color */
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        nav {
+            background-color: #eee; /* Light gray navigation background */
+            padding: 10px;
+            text-align: center; /* Center the navigation links */
+        }
+
+        nav a {
+            display: inline-block; /* Make links behave like blocks */
+            margin: 0 10px; /* Add some spacing between links */
+            padding: 5px 10px; /* Add padding to the links */
+            text-decoration: none; /* Remove underlines from links */
+            color: #333; /* Dark gray link color */
+        }
+
+        nav a:hover {
+            background-color: #ddd; /* Slightly darker background on hover */
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff; /* White content background */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #555; /* Slightly darker heading color */
+        }
+
+        p {
+            line-height: 1.6; /* Improve readability */
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background-color: #333; /* Dark footer background */
+            color: #fff; /* White text color */
+            padding: 10px;
+            text-align: center;
+            position: fixed; /* Fixed to the bottom of the viewport */
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Job Portal</h1>
+        
+    </header>
+
+    <div class="container">
+        <h2>About Us</h2>
+        <p>Welcome to our job portal! We are dedicated to connecting talented individuals with exciting career opportunities. Our mission is to simplify the job search process and empower both job seekers and employers to find the perfect match.</p>
+
+        <p>We believe that everyone deserves access to fulfilling work, and we strive to create a platform that fosters growth and success. Whether you're a seasoned professional looking for a new challenge or a fresh graduate eager to start your career, we're here to support you every step of the way.</p>
+
+        <p>Our team comprises experienced professionals passionate about recruitment and technology. We are constantly working to improve our platform and provide the best possible experience for our users. We value your feedback and encourage you to reach out to us with any questions or suggestions.</p>
+
+        <p>Thank you for choosing our job portal. We look forward to helping you achieve your career goals!</p>
+
+        <h2>Our Values</h2>
+        <ul>
+            <li><strong>Integrity:</strong> We conduct our business with honesty and transparency.</li>
+            <li><strong>Innovation:</strong> We embrace new technologies and approaches to improve our services.</li>
+            <li><strong>Collaboration:</strong> We work together to achieve our common goals.</li>
+            <li><strong>Excellence:</strong> We strive for the highest standards in everything we do.</li>
+        </ul>
+
+        <h2>Contact Us</h2>
+        <p>Contact us via email at<a href="mailto:itsector@jobportal.com">itsector@jobportal.com</a>or by phone at<a href="tel:+11234567890"> 123-456-7890</a>.</p>
+    </div>
+
+    <footer>
+        &copy; 2024 Job Portal. All rights reserved.
+    </footer>
+
+</body>
+</html>
+
+    <!-- Hero Section -->
+    
+
+    <!-- Mission and Vision Section -->
+    <div class="container text-center">
+        <h2 class="mt-5">Our Mission</h2>
+        <p class="mt-5">Our mission is to connect talented individuals with the best job opportunities across the globe.</p>
+        <h2 class="mt-5">Our Vision</h2>
+        <p class="mt-5">We envision a world where everyone has access to meaningful work that fuels their passion and growth.</p>
+    </div>
+
+    <!-- Team Section -->
+    <div class="container team-section" id="team">
+        <h2 class="mb-4">Meet Our Team</h2>
+        <div class="row">
+            <!-- Team Member 1 -->
+            <div class="col-md-4 team-member">
+                <img src="/static/images/rach.jpeg" alt="Team Member 1">
+                <h4>Rachana Bhilare</h4>
+                <p>CEO & Founder</p>
+            </div>
+            <!-- Team Member 2 -->
+            <div class="col-md-4 team-member">
+                <img src="/static/images/varsh.jpeg "alt="Team Member 2">
+                <h4>Varsha Dhamal</h4>
+                <p>Chief Marketing Officer</p>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Contact Info Section -->
+    <div class="container contact-info">
+        <h3>Contact Us</h3>
+        <p>If you want to get in touch with us for any reason, feel free to drop us a message!</p>
+        <a href="mailto:contact@jobportal.com" class="btn btn-custom btn-lg">Contact Us</a>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js for interactive elements -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Example of interactive hover effect (team member scaling on hover)
+        document.querySelectorAll('.team-member').forEach(function(member) {
+            member.addEventListener('mouseover', function() {
+                this.style.transform = 'scale(1.1)';
+            });
+            member.addEventListener('mouseout', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

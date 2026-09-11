@@ -1,0 +1,151 @@
+{% load static %}
+
+{% block content %}
+    <div class="job-details-container">
+        <div class="job-header">
+            <h1>{{ job.job_title }}</h1>
+            <p class="company-name">{{ job.company.name }}</p>
+        </div>
+
+        <div class="job-info">
+            <div class="job-left">
+                <h3>Job Description</h3>
+                <p>{{ job.description }}</p>
+                <div class="job-stats">
+                    <p><strong>Location:</strong> {{ job.location }}</p>
+                    <p><strong>Salary:</strong> ${{ job.salary }}</p>
+                    <p><strong>Application Deadline:</strong> {{ job.application_deadline|date:"F j, Y" }}</p>
+                    <p><strong>Vacancies Available:</strong> {{ job.vacancies }}</p>
+                    <p><strong>Total Applications:</strong> {{ job.total_applications }}</p>
+                </div>
+            </div>
+            
+            <div class="job-right">
+                <h3>Apply for this Job</h3>
+                <p>Ready to take the next step in your career? Apply now for this exciting opportunity!</p>
+                <button id="apply-now-btn" class="btn-apply">Apply Now</button>
+            </div>
+        </div>
+
+        <!-- Application Form Section (Initially hidden) -->
+        <div id="apply-form-container" style="display: none; margin-top: 30px;">
+            <h3>Application Form</h3>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <!-- Full Name -->
+                <label for="full_name">Full Name</label>
+                <input type="text" id="full_name" name="full_name" required>
+
+                <!-- Email -->
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <!-- Phone -->
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" name="phone" required>
+
+                <!-- Resume -->
+                <label for="resume">Upload Resume</label>
+                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+
+                <!-- Submit Button -->
+                <button type="submit">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal (Confirmation Popup) -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h1>Application Submitted Successfully!</h1>
+            <p>Thank you for applying for the job at <strong>{{ job.company.name }}</strong>.</p>
+            <div class="confirmation-details">
+                <p><strong>Name:</strong> {{ application.full_name }}</p>
+                <p><strong>Email:</strong> {{ application.email }}</p>
+                <p><strong>Resume:</strong> <a href="{{ application.resume.url }}" target="_blank">Download your Resume</a></p>
+            </div>
+            <a href="{% url 'homepage' %}" class="cta-button">Go back to Home</a>
+            <p class="footer-text">&copy; 2025 JobPortal. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        .cta-button {
+            background-color: #3498db;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #2980b9;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 20px;
+        }
+    </style>
+
+    <script>
+        // Show the modal when the form is submitted successfully
+        function openModal() {
+            document.getElementById("confirmationModal").style.display = "flex";
+        }
+
+        // Close the modal
+        function closeModal() {
+            document.getElementById("confirmationModal").style.display = "none";
+        }
+
+        // When the "Apply Now" button is clicked, show the application form
+        document.getElementById('apply-now-btn').addEventListener('click', function() {
+            document.getElementById('apply-form-container').style.display = 'block';
+        });
+    </script>
+{% endblock %}

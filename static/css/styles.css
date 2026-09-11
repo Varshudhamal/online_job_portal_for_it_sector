@@ -1,0 +1,289 @@
+/* jobs/static/css/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+}
+
+header nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+section.job-listings {
+    padding: 20px;
+    background-color: white;
+}
+
+.filters {
+    margin-bottom: 20px;
+}
+
+.filters form div {
+    margin-bottom: 10px;
+}
+
+.job-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.job-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.job-card h2 {
+    color: #333;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    padding: 10px;
+    margin: 0 5px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.pagination a:hover {
+    background-color: #45a049;
+}
+
+.apply-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.apply-button:hover {
+    background-color: #45a049;
+}
+/* CSS for contact_us.html */
+
+/* Container for the entire contact form */
+.contact-form-container {
+    padding: 60px 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form-container h2 {
+    font-size: 2rem;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Form Styling */
+.contact-form {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Form label */
+.form-label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Focused input field */
+.form-control:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(0, 200, 0, 0.5);
+}
+
+/* Submit Button Styling */
+.btn-block {
+    font-size: 1.1rem;
+    padding: 12px;
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.btn-primary:hover {
+    background-color: #45a049;
+    border-color: #45a049;
+}
+
+/* General Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.contact-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.contact-info {
+    width: 80%;
+    background-color: #ffffff;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    color: #777;
+    font-size: 14px;
+}
+
+.contact-details {
+    margin-top: 20px;
+}
+
+.info {
+    margin-bottom: 15px;
+}
+
+.info h3 {
+    color: #007BFF;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.info p {
+    color: #555;
+    font-size: 14px;
+}
+
+.contact-form {
+    width: 80%;
+    background-color: #ffffff;
+    padding: 75px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: 500;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    border-color: #71d6ef;
+    outline: none;
+}
+
+.submit-btn {
+    padding: 12px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color:#0864c6 ;
+}
+
+/* Google Map Styling */
+.map-container {
+    margin-top: 40px;
+    text-align: center;
+}
+
+#map {
+    width: 100%;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(244, 208, 208, 0.1);
+}
+
+@media screen and (max-width: 768px) {
+    .contact-section {
+        flex-direction: column;
+    }
+
+    .contact-info, .contact-form {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .contact-info h2, .contact-form h2 {
+        text-align: center;
+    }
+    .contact-image {
+        max-width: 100%;
+        height: 300px;
+        position: relative;
+        margin-top: 50px;
+    }
+}
+

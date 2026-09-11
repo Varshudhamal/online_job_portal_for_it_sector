@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/l1.jpg' %}"); /* Background image URL */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 50px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8); /* Slight transparency */
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background:none;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            color: rgb(252, 248, 247);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: bold;
+            color: rgb(252, 248, 247);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: rgb(7, 7, 7);
+        }
+
+        .form-group input:focus {
+            border-color:rgb(75, 189, 234);
+            outline: none;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 12px;
+            background-color: rgb(75, 189, 234);
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color:rgb(75, 189, 234);
+        }
+
+        /* Message Styling */
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .message {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Forgot Password Link */
+        .form-group .forgot-password {
+            text-align: right;
+            font-size: 14px;
+            color: rgb(181, 230, 247);
+            margin-top: 10px;
+        }
+
+        .form-group .forgot-password a {
+            color: rgb(75, 189, 234);
+            text-decoration: none;
+        }
+
+        .form-group .forgot-password a:hover {
+            color:rgb(75, 189, 234);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+
+    <!-- Display success or error messages -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Username -->
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group" style="position: relative;">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <i class="fas fa-eye password-toggle" id="toggle-password" onclick="togglePasswordVisibility()"></i>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+            <button type="submit">Login</button>
+        </div>
+
+        <!-- Forgot Password Link -->
+        <div class="form-group forgot-password">
+            <a href="{% url 'register' %}"><h3>Not Registered? Register Now</h3></a>
+        </div>
+    </form>
+</div>
+
+<!-- JavaScript for Password Visibility Toggle -->
+<script>
+    function togglePasswordVisibility() {
+        const passwordField = document.getElementById('password');
+        const passwordIcon = document.getElementById('toggle-password');
+        
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            passwordIcon.classList.remove('fa-eye');
+            passwordIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordField.type = 'password';
+            passwordIcon.classList.remove('fa-eye-slash');
+            passwordIcon.classList.add('fa-eye');
+        }
+    }
+</script>
+
+</body>
+</html>

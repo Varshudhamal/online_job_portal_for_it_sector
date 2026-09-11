@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* General styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .logout-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 50px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logout-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logout-container p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .logout-container i {
+            font-size: 3rem;
+            color: #ff6347;
+            margin-bottom: 15px;
+            animation: popUp 0.8s ease-in-out;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg,rgb(85, 178, 199),rgb(58, 197, 205));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:hover {
+            background: linear-gradient(45deg,rgb(62, 181, 228),rgb(85, 146, 184));
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes popUp {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-container">
+        <i class="fas fa-sign-out-alt"></i>
+        <h2>You have logged out</h2>
+        <p>Thank you for visiting. We hope to see you again soon.</p>
+        <a href="{% url 'login' %}" class="btn">Go to Login Page</a>
+    </div>
+</body>
+</html>

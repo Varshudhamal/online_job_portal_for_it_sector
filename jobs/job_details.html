@@ -1,0 +1,129 @@
+<!-- job_details.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ job.title }} - Job Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 24px;
+        }
+        .job-details {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .job-details h2 {
+            color: #333;
+            font-size: 28px;
+        }
+        .job-details p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #666;
+        }
+        .job-info {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+        }
+        .job-info div {
+            padding: 15px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .job-info div h4 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .apply-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+        .apply-btn:hover {
+            background-color: #45a049;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Job Portal - {{ job.title }}
+</header>
+
+<div class="container">
+    <div class="job-details">
+        <h2>{{ job.title }}</h2>
+        <p><strong>Company:</strong> {{ job.company.name }}</p>
+        <p><strong>Location:</strong> {{ job.location }}</p>
+        <p><strong>Salary:</strong> ${{ job.salary }}</p>
+        <p><strong>Category:</strong> {{ job.category.name }}</p>
+        <p><strong>Description:</strong> {{ job.description }}</p>
+        <p><strong>Posted on:</strong> {{ job.posted_on|date:"F j, Y" }}</p>
+        
+        <div class="job-info">
+            <div>
+                <h4>Job Type</h4>
+                <p>{{ job.job_type }}</p>
+            </div>
+            <div>
+                <h4>Experience Level</h4>
+                <p>{{ job.experience_level }}</p>
+            </div>
+            <div>
+                <h4>Application Deadline</h4>
+                <p>{{ job.application_deadline|date:"F j, Y" }}</p>
+            </div>
+            <div>
+                <h4>Skills Required</h4>
+                <p>{{ job.skills_required }}</p>
+            </div>
+        </div>
+
+        <a href="{% url 'apply_for_job' job.id %}" class="apply-btn">Apply for this Job</a>
+    </div>
+</div>
+
+<div class="footer">
+    <p>Job Portal | All Rights Reserved</p>
+</div>
+
+</body>
+</html>

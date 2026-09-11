@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Job Applications</title>
+    <style>
+        /* Basic Reset */
+        body, h1, h2, p {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Layout */
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #f5f5f5;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 20px;
+            color: #666;
+        }
+
+        /* Applications Section */
+        .applications-list {
+            margin-top: 30px;
+        }
+
+        .application-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .application-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .application-card h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .application-card p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .application-card .status {
+            padding: 5px 10px;
+            font-weight: bold;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .status-applied {
+            background-color: #4CAF50; /* Green */
+        }
+
+        .status-under-review {
+            background-color: #FF9800; /* Orange */
+        }
+
+        .status-rejected {
+            background-color: #F44336; /* Red */
+        }
+
+        .status-hired {
+            background-color: #2196F3; /* Blue */
+        }
+
+        .btn-view {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-view:hover {
+            background-color: #45a049;
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>Your Job Applications</h1>
+            <p>Manage and view your job applications</p>
+        </header>
+
+        <!-- Applications List -->
+        {% if applications %}
+            <div class="applications-list">
+                {% for application in applications %}
+                    <div class="application-card">
+                        <h2>{{ application.job.title }}</h2>
+                        <p><strong>Company:</strong> {{ application.job.company.name }}</p>
+                        <p><strong>Applied On:</strong> {{ application.date_applied|date:"Y-m-d" }}</p>
+                        <div class="status {{ application.status|lower }}">
+                            {{ application.status }}
+                        </div>
+                        <button class="btn-view" onclick="window.location.href='{% url 'application_details' application.id %}'">View Application</button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>You have not applied to any jobs yet. Start applying now!</p>
+        {% endif %}
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Your Job Dashboard. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
